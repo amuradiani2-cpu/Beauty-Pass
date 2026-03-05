@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Beauty Pass 🌸</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #333;
+    }
+    .container {
+      background: white;
+      border-radius: 20px;
+      padding: 50px 40px;
+      max-width: 600px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    }
+    h1 { font-size: 2.5rem; color: #ff6b9d; margin-bottom: 10px; }
+    .subtitle { font-size: 1.1rem; color: #666; margin-bottom: 30px; }
+    .status {
+      background: #f0fdf4;
+      border: 1px solid #86efac;
+      border-radius: 10px;
+      padding: 15px 20px;
+      margin-bottom: 30px;
+      color: #166534;
+      font-weight: 600;
+    }
+    .api-link {
+      display: inline-block;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      text-decoration: none;
+      padding: 12px 30px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1rem;
+      margin: 5px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .api-link:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(102,126,234,0.4); }
+    .features { margin-top: 30px; text-align: left; }
+    .feature {
+      display: flex; align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid #f3f4f6;
+      font-size: 0.95rem;
+      color: #555;
+    }
+    .feature span { margin-right: 10px; font-size: 1.2rem; }
+    footer { margin-top: 30px; color: #aaa; font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🌸 Beauty Pass</h1>
+    <p class="subtitle">სილამაზის სალონების სარეზერვო პლატფორმა</p>
+
+    <div class="status" id="status">⏳ API-ს შემოწმება...</div>
+
+    <a href="/api/status" class="api-link">🔧 API სტატუსი</a>
+    <a href="/api/packages" class="api-link">📦 პაკეტები</a>
+    <a href="/api/salons" class="api-link">🏢 სალონები</a>
+
+    <div class="features">
+      <div class="feature"><span>💅</span> სილამაზის სალონების ჯავშანი</div>
+      <div class="feature"><span>🌟</span> Beauty Points სისტემა</div>
+      <div class="feature"><span>👩‍🎨</span> სპეციალისტების არჩევა</div>
+      <div class="feature"><span>📧</span> QR კოდი ელფოსტაზე</div>
+      <div class="feature"><span>🔐</span> უსაფრთხო 2FA ავტორიზაცია</div>
+      <div class="feature"><span>👥</span> საზოგადოების ფუნქციები</div>
+    </div>
+
+    <footer>© 2026 Beauty Pass. ყველა უფლება დაცულია.</footer>
+  </div>
+
+  <script>
+    fetch('/api/status')
+      .then(r => r.json())
+      .then(data => {
+        document.getElementById('status').textContent = '✅ სერვერი მუშაობს! ' + data.timestamp;
+        document.getElementById('status').style.background = '#f0fdf4';
+        document.getElementById('status').style.borderColor = '#86efac';
+        document.getElementById('status').style.color = '#166534';
+      })
+      .catch(() => {
+        document.getElementById('status').textContent = '❌ სერვერი მიუწვდომელია';
+        document.getElementById('status').style.background = '#fef2f2';
+        document.getElementById('status').style.borderColor = '#fca5a5';
+        document.getElementById('status').style.color = '#991b1b';
+      });
+  </script>
+</body>
+</html>
